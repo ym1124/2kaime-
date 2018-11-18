@@ -8,9 +8,9 @@ class Tutorial
 {
 public:
 	int posX, posY,hp;
-	int cnt, animX;
+	int cnt, animX,tutorialEffectX;
 	int enemy_gh,hitSound;
-	int startFlgCnt;
+	int startFlgCnt,tutorialCnt;
 	bool hitFlg;
 	Tutorial();
 	void StartGame();

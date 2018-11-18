@@ -33,6 +33,8 @@ void UI::DrawHp()
 		DrawRectGraph(hpPosX, hpPosY, 820, 173, 820, BOSSHP_GAGE_Y, bosshp_gh, true);
 		DrawRectGraph(hpPosX, hpPosY, 0, 0, hpAnimX2, BOSSHP_GAGE_Y, bosshp_gh, true);
 	}
+	DrawRectGraph(PlayerInit()->posX, PlayerInit()->posY - 30, 166, 0, 165, 40, PlayerInit()->playerHpGage_gh, true);
+	DrawRectGraph(PlayerInit()->posX, PlayerInit()->posY - 30, 0, 0, PlayerInit()->hp*0.33f, 40, PlayerInit()->playerHpGage_gh, true);
 }
 
 void UI::HpManager()//bossダメージ減らすのはフラグ１つ作って管理したほうが良い

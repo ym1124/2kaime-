@@ -115,6 +115,7 @@ void Scene::DoTitleScene()
 	{
 		nowScene = SCENE::TUTORIAL;
 		StopSoundFile();
+		BackInit()->darkCnt= DARK_CNT;
 	}
 }
 
@@ -126,6 +127,8 @@ void Scene::DoTutorialScene()
 	PlayerUpdata(PlayerInit());
 	//チュートリアル
 	TutorialAll();
+
+	BackInit()->DrawDark();
 }
 
 void Scene::DoPlayScene()
@@ -187,10 +190,13 @@ void Scene::DoPlayScene()
 
 	if (GetUIPointer()->bossHp < 0)
 	{
+		BackInit()->darkCnt = DARK_CNT;
 		nowScene = PLAY2;
 		StopSoundFile();
 		playNowCnt = 0;
 	}
+
+	BackInit()->DrawDark();
 
 	//デバッグ用表示
 	SetFontSize(50);
@@ -232,6 +238,8 @@ void Scene::DoBossScene()
 		StopSoundFile();
 	}
 
+	BackInit()->DrawDark();
+
 	//デバッグ用表示
 	SetFontSize(50);
 	//DrawFormatString(0, 0, GetColor(0, 0, 0), "カウント:%d", playNowCnt);
@@ -255,6 +263,8 @@ void Scene::DoBossDeadScene()
 	ParticleUpdata(PlayerInit());
 	//プレイヤー描画
 	PlayerUpdata(PlayerInit());
+
+	BackInit()->DrawDark();
 }
 
 void Scene::DoClearScene()
@@ -358,6 +368,7 @@ void LoadAll()
 		BackInit()->Flame_gh = LoadGraph("Data/Image/Bluebar.png");
 		BackInit()->floor_gh = LoadGraph("Data/Image/floor.png");
 		BackInit()->tutorial_gh = LoadGraph("Data/Image/チュートリアル.png");
+		BackInit()->dark_gh = LoadGraph("Data/Image/フェードインフェードアウト.png");
 		backGraphLoadFlg = true;
 	}
 	if (!FallDownLoadGraphFlg)

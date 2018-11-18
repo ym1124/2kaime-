@@ -10,6 +10,7 @@
 #define GROUND_HEIGHT 100
 #define CLOUD_WIDTH 500
 #define CLOUD_HEIGHT 507
+#define DARK_CNT 50
 
 //********プレイヤー関連*************//
 #define PLAYER_WIDTH 150

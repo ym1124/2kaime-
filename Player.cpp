@@ -152,8 +152,6 @@ void Player::DrawPlayer()
 		PlayerInit()->posY += rand() % 16 - 7;
 	}
 
-	DrawRectGraph(posX, posY-30, 166, 0, 165, 40, playerHpGage_gh, true);
-	DrawRectGraph(posX, posY-30, 0, 0, hp*0.33f, 40, playerHpGage_gh, true);
 	switch (playerMode)//ドットの色調整
 	{
 	case NORMAL:

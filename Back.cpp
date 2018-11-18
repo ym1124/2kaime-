@@ -13,6 +13,7 @@ Back::Back()
 	animCnt = 0;
 	animX = 0;
 	animY = 0;
+	darkCnt = DARK_CNT;
 	tBossX = BOSS1_X_INIT;
 	tBossY = 1100;
 	pictureNum = 0;
@@ -247,6 +248,17 @@ void Back::DrawOverBack()
 	//ƒŠƒgƒ‰ƒC‚Ì‰æ‘œ‚Æ‚©
 }
 
+void Back::DrawDark()
+{
+	if (darkCnt > 0)
+	{
+		darkCnt--;
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, darkCnt *5);
+		DrawGraph(0, 0, dark_gh, true);
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+	}
+}
+
 void ResetBack()
 {
 	BackInit()->movie = false;
@@ -258,6 +270,7 @@ void ResetBack()
 	BackInit()->animCnt = 0;
 	BackInit()->animX = 0;
 	BackInit()->animY = 0;
+	BackInit()->darkCnt = DARK_CNT;
 }
 
 Cloud::Cloud()

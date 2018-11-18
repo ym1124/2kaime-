@@ -7,6 +7,8 @@ Tutorial::Tutorial()
 {
 	cnt = 0;
 	animX = 0;
+	tutorialCnt = 0;
+	tutorialEffectX = 0;
 	hitFlg = false;
 	startFlgCnt = 0;
 	hp = 255;
@@ -27,6 +29,8 @@ void Tutorial::StartFlgCntINIT()
 
 void Tutorial::StartGame()
 {
+	tutorialCnt++;
+	tutorialEffectX = tutorialCnt / 10 % 6;
 	if (!TutorialLoadGraphFlg)
 	{
 		enemy_gh = LoadGraph("Data/Image/c‰¡ƒŒ[ƒU[.png");
@@ -37,7 +41,10 @@ void Tutorial::StartGame()
 	if ((GetPlayerPointer()->posX > posX - PLAYER_WIDTH&&GetPlayerPointer()->posX < posX + BOSS1_LAZER_EYE_WIDTH)
 		&& (GetPlayerPointer()->posY>posY - PLAYER_HEIGHT&&GetPlayerPointer()->posY < posY + BOSS1_LAZER_EYE_HEIGHT)
 		&& GetPlayerPointer()->playerMode == BALL)
+	{
 		hitFlg = true;
+		DrawRectGraph(PlayerInit()->posX, PlayerInit()->posY, tutorialEffectX * 182, 127, 182, 189, PlayerInit()->player_effect_gh, true);
+	}
 	else
 		hitFlg = false;
 	if (hitFlg&&hp >= 50)
@@ -52,6 +59,7 @@ void Tutorial::StartGame()
 		if (BackInit()->tBossY < BOSS1_Y_INIT&&startFlgCnt>2)
 		{
 			GetScenePointer()->nowScene = PLAY1;
+			BackInit()->darkCnt = DARK_CNT;
 		}
 	}
 }
@@ -92,6 +100,8 @@ void ResetTutorial()
 	tu->ResetTutorial();
 	tu->cnt = 0;
 	tu->animX = 0;
+	tu->tutorialCnt = 0;
+	tu->tutorialEffectX = 0;
 	tu->hitFlg = false;
 }
 
