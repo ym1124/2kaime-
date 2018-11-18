@@ -99,8 +99,8 @@ void FallDown::DrawFallDown()
 			SetDrawBright(255, 255, 255);
 		}
 		DrawGraph(posX, posY, bossChance_gh2, true);
-		DrawBox(posX - PLAYER_WIDTH + 230, posY - PLAYER_HEIGHT, posX + FALLDOWN_BOSS_WIDTH - 230, posY + FALLDOWN_BOSS_HEIGHT - 130, GetColor(50, 150, 255), false);//デバッグ用
-		DrawBox(eyePosX, eyePosY, eyePosX + EYE_WIDTH, eyePosY + EYE_HEIGHT, GetColor(50, 150, 255), false);//デバッグ用
+		//DrawBox(posX - PLAYER_WIDTH + 230, posY - PLAYER_HEIGHT, posX + FALLDOWN_BOSS_WIDTH - 230, posY + FALLDOWN_BOSS_HEIGHT - 130, GetColor(50, 150, 255), false);//デバッグ用
+		//DrawBox(eyePosX, eyePosY, eyePosX + EYE_WIDTH, eyePosY + EYE_HEIGHT, GetColor(50, 150, 255), false);//デバッグ用
 	}
 	/*DrawFormatString(0, 250, GetColor(255, 255, 255), "FallDownBossY:%d", posY);*/
 }

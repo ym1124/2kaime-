@@ -97,24 +97,24 @@ void Scene::DoTitleScene()
 		PlayerInit()->flogFlg = true;
 	}
 
-	if (!TitleModeBgmFlg)
+	/*if (!TitleModeBgmFlg)
 	{
 		PlaySoundFile("Data/Music/bgm/PlayModeBgm.mp3", DX_PLAYTYPE_BACK);
 		TitleModeBgmFlg = true;
-	}
+	}*/
 
 	//背景描画
 	BackUpdata(BackInit());
 
 	//デバッグ表示
-	//debugController(pad);
+	debugController(pad);
 
 	if (DerayButtonAandReturn() == 1)
 		TitleSceneCnt++;
 	if (TitleSceneCnt == 2)
 	{
 		nowScene = SCENE::TUTORIAL;
-		StopSoundFile();
+		/*StopSoundFile();*/
 		BackInit()->darkCnt= DARK_CNT;
 	}
 }
@@ -205,14 +205,14 @@ void Scene::DoPlayScene()
 	//DrawFormatString(0, 100, GetColor(0, 0, 0), "プレイヤー状態:%d,ヒットフラグ:%d", PlayerInit()->playerMode, PlayerInit()->hitFlg);
 	//if (CheckHitKey(KEY_INPUT_E) || pad&(1 << BUTTON_B))//自爆ボタン
 		//PlayerInit()->playerMode = DEAD;
-	//debugController(pad);
+	debugController(pad);
 }
 
 void Scene::DoBossScene()
 {
 	if (!BossModeBgmFlg)
 	{
-		PlaySoundFile("Data/Music/bgm/PlayModeBgm.mp3", DX_PLAYTYPE_BACK);
+		PlaySoundFile("Data/Music/bgm/危機(２段階目の曲).mp3", DX_PLAYTYPE_BACK);
 		BossModeBgmFlg = true;
 	}
 	playNowCnt++;
@@ -240,21 +240,24 @@ void Scene::DoBossScene()
 
 	BackInit()->DrawDark();
 
+	if (playNowCnt>11400)//1ループ5700
+		playNowCnt = 0;
+
 	//デバッグ用表示
 	SetFontSize(50);
-	//DrawFormatString(0, 0, GetColor(0, 0, 0), "カウント:%d", playNowCnt);
+	DrawFormatString(0, 0, GetColor(0, 0, 0), "カウント:%d", playNowCnt);
 	//DrawFormatString(0, 50, GetColor(0, 0, 0), "HP:%d", PlayerInit()->hp);
 	//DrawFormatString(0, 100, GetColor(0, 0, 0), "プレイヤー状態:%d,ヒットフラグ:%d", PlayerInit()->playerMode, PlayerInit()->hitFlg);
-	if (CheckHitKey(KEY_INPUT_E) || pad&(1 << BUTTON_B))//自爆ボタン
-		PlayerInit()->playerMode = DEAD;
-	//debugController(pad);
+	//if (CheckHitKey(KEY_INPUT_E) || pad&(1 << BUTTON_B))//自爆ボタン
+	//	PlayerInit()->playerMode = DEAD;
+	debugController(pad);
 }
 
 void Scene::DoBossDeadScene()
 {
 	if (!BossDeadModeBgmFlg)
 	{
-		PlaySoundFile("Data/Music/bgm/PlayModeBgm.mp3", DX_PLAYTYPE_BACK);
+		PlaySoundFile("Data/Music/bgm/ゴゴゴ激しい地鳴り音.mp3", DX_PLAYTYPE_LOOP);
 		BossDeadModeBgmFlg = true;
 	}
 	//背景描画
@@ -406,7 +409,9 @@ void LoadAll()
 		PlayerInit()->playerDot_gh = LoadGraph("Data/Image/playercolor.png");
 		PlayerInit()->player_effect_gh = LoadGraph("Data/Image/effect.png");
 		PlayerInit()->playerHpGage_gh = LoadGraph("Data/Image/playerhp.png");
-		PlayerInit()->ball_se = LoadSoundMem("Data/Music/se/");
+		PlayerInit()->ball_se = LoadSoundMem("Data/Music/se/reflection.mp3");
+		PlayerInit()->jump_se = LoadSoundMem("Data/Music/se/wind-blowing-2.mp3");
+		PlayerInit()->playerDamage_se = LoadSoundMem("Data/Music/se/特殊攻撃04.mp3");
 		playerLoadGraphFlg = true;
 	}
 	if (!PlayerParts::loadPlayerPartsExplosionFlg)

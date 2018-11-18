@@ -84,9 +84,9 @@ void Player::DrawPlayer()
 			playerG--;
 			playerB--;
 		}
-		if (!isLeft)
-			DrawRectGraph(posX, posY, animX*PLAYER_WIDTH, 0, PLAYER_WIDTH, PLAYER_HEIGHT, playerDot_gh, true, false);//ドット描画
-		else
+		//if (!isLeft)
+			//DrawRectGraph(posX, posY, animX*PLAYER_WIDTH, 0, PLAYER_WIDTH, PLAYER_HEIGHT, playerDot_gh, true, false);//ドット描画
+		if(isLeft)
 			DrawRectGraph(posX, posY, animX*PLAYER_WIDTH, 0, PLAYER_WIDTH, PLAYER_HEIGHT, player_gh, true, true);
 		SetDrawBright(255, 255, 255);//描画色戻す
 		if (jumpFlg)
@@ -98,34 +98,35 @@ void Player::DrawPlayer()
 		break;
 
 	case BALL:
-		PlaySoundMem(ball_se, DX_PLAYTYPE_BACK);
 		if (CheckHitKey(KEY_INPUT_RIGHT) || pad&(1 << BUTTON_R))//右に進んでいるなら
 		{
 			DrawRectGraph(posX, posY + PLAYER_LEG_HEIGHT, ballAnimX*PLAYER_BALL_WIDTH, 400, PLAYER_BALL_WIDTH, PLAYER_BALL_HEIGHT, player_gh, true, false);
 
-			if (playerRainbowFlg == true)
-				SetDrawBright(playerR, playerG, playerB);
-			DrawRectGraph(posX, posY + PLAYER_LEG_HEIGHT, ballAnimX*PLAYER_BALL_WIDTH, 400, PLAYER_BALL_WIDTH, PLAYER_BALL_HEIGHT, playerDot_gh, true, false);
+			//if (playerRainbowFlg == true)
+				//SetDrawBright(playerR, playerG, playerB);
+			//DrawRectGraph(posX, posY + PLAYER_LEG_HEIGHT, ballAnimX*PLAYER_BALL_WIDTH, 400, PLAYER_BALL_WIDTH, PLAYER_BALL_HEIGHT, playerDot_gh, true, false);
 		}
 		else if (CheckHitKey(KEY_INPUT_RIGHT) || pad&(1 << BUTTON_L))//左に進んでいるなら
 		{
 			DrawRectGraph(posX, posY + PLAYER_LEG_HEIGHT, ballAnimX*PLAYER_BALL_WIDTH, 400, PLAYER_BALL_WIDTH, PLAYER_BALL_HEIGHT, player_gh, true, true);
-			if (playerRainbowFlg == true)
-				SetDrawBright(playerR, playerG, playerB);
-			DrawRectGraph(posX, posY + PLAYER_LEG_HEIGHT, ballAnimX*PLAYER_BALL_WIDTH, 400, PLAYER_BALL_WIDTH, PLAYER_BALL_HEIGHT, playerDot_gh, true, true);
+			//if (playerRainbowFlg == true)
+				//SetDrawBright(playerR, playerG, playerB);
+			//DrawRectGraph(posX, posY + PLAYER_LEG_HEIGHT, ballAnimX*PLAYER_BALL_WIDTH, 400, PLAYER_BALL_WIDTH, PLAYER_BALL_HEIGHT, playerDot_gh, true, true);
 		}
 		else
 		{
 			DrawRectGraph(posX, posY + PLAYER_LEG_HEIGHT, ballAnimX*PLAYER_BALL_WIDTH, 400, PLAYER_BALL_WIDTH, PLAYER_BALL_HEIGHT, player_gh, true, false);
 
-			if (playerRainbowFlg == true)
-				SetDrawBright(playerR, playerG, playerB);
-			DrawRectGraph(posX, posY + PLAYER_LEG_HEIGHT, ballAnimX*PLAYER_BALL_WIDTH, 400, PLAYER_BALL_WIDTH, PLAYER_BALL_HEIGHT, playerDot_gh, true, false);
+			//if (playerRainbowFlg == true)
+				//SetDrawBright(playerR, playerG, playerB);
+			//DrawRectGraph(posX, posY + PLAYER_LEG_HEIGHT, ballAnimX*PLAYER_BALL_WIDTH, 400, PLAYER_BALL_WIDTH, PLAYER_BALL_HEIGHT, playerDot_gh, true, false);
 		}
 		SetDrawBright(255, 255, 255);
 		if ((lazerHitFlg))//どれか１つのオブジェクトに当たってさえいれば当たっている判定
 		{
 			DrawRectGraph(posX-10, posY+20, ballAnimX*PLAYER_INVINCIBLE_WIDTH, 0, PLAYER_INVINCIBLE_WIDTH, PLAYER_INVINCIBLE_HEIGHT, player_effect_gh, true, false);
+			if(GetScenePointer()->playNowCnt/3%2==1)
+				PlaySoundMem(ball_se, DX_PLAYTYPE_BACK);
 		}
 		break;
 
@@ -137,9 +138,9 @@ void Player::DrawPlayer()
 		if (playerRainbowFlg == true)
 			SetDrawBright(playerR, playerG, playerB);
 
-		if (!isLeft)
-			DrawRectGraph(posX, posY, animX*PLAYER_WIDTH, 0, PLAYER_WIDTH, PLAYER_HEIGHT, playerDot_gh, true, false);//ドット描画
-		else
+		//if (!isLeft)
+			//DrawRectGraph(posX, posY, animX*PLAYER_WIDTH, 0, PLAYER_WIDTH, PLAYER_HEIGHT, playerDot_gh, true, false);//ドット描画
+		if(isLeft)
 			DrawRectGraph(posX, posY, animX*PLAYER_WIDTH, 0, PLAYER_WIDTH, PLAYER_HEIGHT, player_gh, true, true);
 		SetDrawBright(255, 255, 255);//描画色戻す
 		if(PlayerInit()->rotationHitFlg == true)
@@ -441,6 +442,7 @@ void PlayerHitCheck(Lazer *lz, Blade *bl, Venom *ve)
 		{
 			tpl->playerRainbowFlg = true;
 			tpl->hp--;
+			PlaySoundMem(tpl->playerDamage_se, DX_PLAYTYPE_BACK);
 		}
 
 		else
@@ -520,6 +522,7 @@ void Player::Jump()
 		posY = posY - JUMP_POWER;
 		jumpX = 0;
 		jumpXCnt = 0;
+		PlaySoundMem(jump_se, DX_PLAYTYPE_BACK);
 	}
 }
 

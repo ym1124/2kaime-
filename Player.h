@@ -12,7 +12,7 @@ public:
 	int posX, posY,posYPrev,posYTemp, posYDamageTemp, posYDamagePrev;
 	int hp;
 	int animX,ballAnimX, animCnt,jumpX,jumpXCnt,knockBackAnimCnt,knockBackAnimX;
-	int player_gh,playerDot_gh, player_effect_gh, ball_se, playerHpGage_gh;
+	int player_gh,playerDot_gh, player_effect_gh, ball_se, playerHpGage_gh,jump_se,playerDamage_se;
 	int pad;
 	int playerMode;
 	int ballModeCnt, knockBackCnt;

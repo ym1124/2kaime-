@@ -18,6 +18,7 @@ Back::Back()
 	tBossY = 1100;
 	pictureNum = 0;
 	movie = false;
+	titleMovie = false;
 }
 
 Back* BackInit()
@@ -75,7 +76,11 @@ void Back::DrawTitleBack()
 	switch (GetScenePointer()->TitleSceneCnt)
 	{
 	case 0:
-		DrawGraph(0, 0, Title_gh, true);
+		if (!titleMovie)
+		{
+			titleMovie = true;
+			PlayMovie("Data/Image/ƒ^ƒCƒgƒ‹.avi", 2, DX_MOVIEPLAYTYPE_BCANCEL);
+		}
 		break;
 	case 1:
 		DrawGraph(0, 0, tutorial_gh, true);
@@ -262,6 +267,7 @@ void Back::DrawDark()
 void ResetBack()
 {
 	BackInit()->movie = false;
+	BackInit()->titleMovie = false;
 	BackInit()->tBossX = BOSS1_X_INIT;
 	BackInit()->tBossY = 1100;
 	BackInit()->fallDownY = 0;

@@ -12,7 +12,7 @@ public:
 	int darkCnt;
 	float bossSwayY;
 	float variableX, variableY;
-	bool movie;
+	bool movie,titleMovie;
 	Back();
 	void DrawBack();
 	void DrawTitleBack();
