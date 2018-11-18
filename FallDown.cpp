@@ -19,6 +19,7 @@ FallDown::FallDown()
 	alertCnt = 200;
 	bossHp = BOSS2HP_INIT;
 	fallDownExistFlg = false;
+	fallDownSeFlg = false;
 	eyeHitFlg = false;
 	fallFlg = false;
 }
@@ -63,6 +64,11 @@ void FallDown::Attack(int cnt, int posX)
 			fpl->hp -= 15;
 		if (posY + FALLDOWN_BOSS_HEIGHT - 300 > PLAYERPOS_Y_INIT)
 		{
+			if (!fallDownSeFlg)
+			{
+				PlaySoundMem(fallDown_se, DX_PLAYTYPE_BACK);
+				fallDownSeFlg = true;
+			}
 			fallFlg = false;
 			alertCnt = 200;
 		}
@@ -85,10 +91,11 @@ void FallDown::DrawFallDown()
 			DrawGraph(posX, WINDOW_Y - 100, bossShadow_gh, true);
 		}
 	}
-	if(fallFlg)
-
 	if (!fallFlg)
+	{
+		fallDownSeFlg = false;
 		shadowCnt = SHADOW_CNT;
+	}
 	if (fallDownExistFlg && (posY + FALLDOWN_BOSS_HEIGHT - 300) > PLAYERPOS_Y_INIT)
 	{
 		DrawGraph(posX, posY, bossChance_gh1, true);
@@ -184,6 +191,7 @@ void ResetFallDown()
 	fl->fallDownExistFlg = false;
 	fl->eyeHitFlg = false;
 	fl->fallFlg = false;
+	fl->fallDownSeFlg = false;
 	fl->fallDownAnimCnt = 0;
 	fl->fallDownAnimX = 0;
 	fl->shadowCnt = SHADOW_CNT;

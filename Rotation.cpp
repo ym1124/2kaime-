@@ -22,11 +22,10 @@ void Rotation::MoveRotation()
 		rotationR = rand() % 255;
 		rotationG = rand() % 255;
 		rotationB = rand() % 255;
+		PlaySoundMem(Rotation::rotation_se, DX_PLAYTYPE_BACK);
 	}
 	if (rotationExistFlg)
 	{
-		if (life == ROTATION_LIFE)
-			PlaySoundMem(Rotation::rotation_se, DX_PLAYTYPE_BACK);
 		life--;
 		rotationPosX = cos(DX_PI / 180 * angle) * r;//r‚Í”¼Œa
 		rotationPosY = sin(DX_PI / 180 * angle) * r;

@@ -10,6 +10,7 @@ Back::Back()
 	fallDownY = 0;
 	bossSwayY = 0;
 	animTCnt = 0;
+	endCnt = 0;
 	animCnt = 0;
 	animX = 0;
 	animY = 0;
@@ -17,6 +18,7 @@ Back::Back()
 	tBossX = BOSS1_X_INIT;
 	tBossY = 1100;
 	pictureNum = 0;
+	titleCnt = 0;
 	movie = false;
 	titleMovie = false;
 }
@@ -61,7 +63,7 @@ void Back::DrawBack()
 		DrawBossDeadBack();
 		break;
 	case CLEAR:
-		DrawOverBack();
+		DrawClearBack();
 		break;
 	case OVER:
 		DrawOverBack();
@@ -76,10 +78,16 @@ void Back::DrawTitleBack()
 	switch (GetScenePointer()->TitleSceneCnt)
 	{
 	case 0:
+		titleCnt++;
 		if (!titleMovie)
 		{
 			titleMovie = true;
 			PlayMovie("Data/Image/タイトル.avi", 2, DX_MOVIEPLAYTYPE_BCANCEL);
+		}
+		if (titleCnt > 100)
+		{
+			titleMovie = false;
+			titleCnt = 0;
 		}
 		break;
 	case 1:
@@ -243,14 +251,20 @@ void Back::DrawPlayBack()
 		fallDownY = -FALLDOWN_BOSS_HEIGHT;
 }
 
+void Back::DrawClearBack()
+{
+	PlayMovie("Data/Image/イントロ_1.avi", 2, DX_MOVIEPLAYTYPE_BCANCEL);
+	endCnt++;
+	if (endCnt>0)
+		ResetGame();
+}
+
 void Back::DrawOverBack()
 {
-	if (!movie)
-	{
-		movie = true;
-		PlayMovie("Data/Image/イントロ_1.avi", 3, DX_MOVIEPLAYTYPE_BCANCEL);
-	}
-	//リトライの画像とか
+	PlayMovie("Data/Image/イントロ_1.avi", 2, DX_MOVIEPLAYTYPE_BCANCEL);
+	endCnt++;
+	if (endCnt>0)
+		ResetGame();
 }
 
 void Back::DrawDark()
@@ -274,9 +288,11 @@ void ResetBack()
 	BackInit()->bossSwayY = 0;
 	BackInit()->animTCnt = 0;
 	BackInit()->animCnt = 0;
+	BackInit()->titleCnt = 0;
 	BackInit()->animX = 0;
 	BackInit()->animY = 0;
 	BackInit()->darkCnt = DARK_CNT;
+	BackInit()->endCnt = 0;
 }
 
 Cloud::Cloud()

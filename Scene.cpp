@@ -366,7 +366,7 @@ void LoadAll()
 		BackInit()->boss_gh1 = LoadGraph("Data/Image/boss1.png");
 		BackInit()->boss_gh2 = LoadGraph("Data/Image/boss2.png");
 		BackInit()->Back_gh = LoadGraph("Data/Image/BackGround.png");
-		BackInit()->Title_gh = LoadGraph("Data/Image/TitleBack.png");
+		//BackInit()->Title_gh = LoadGraph("Data/Image/タイトル.avi");
 		BackInit()->Over_gh = LoadGraph("Data/Image/OverBack.png");
 		BackInit()->Flame_gh = LoadGraph("Data/Image/Bluebar.png");
 		BackInit()->floor_gh = LoadGraph("Data/Image/floor.png");
@@ -382,6 +382,7 @@ void LoadAll()
 		GetFallDownPointer()->boss_gh = LoadGraph("Data/Image/bossfall.png");
 		GetFallDownPointer()->bossShadow_gh = LoadGraph("Data/Image/落ちてくる影.png");
 		GetFallDownPointer()->alert_gh = LoadGraph("Data/Image/注意ピン.png");
+		GetFallDownPointer()->fallDown_se = LoadSoundMem("Data/Music/se/monster-footstep1.mp3");
 		FallDownLoadGraphFlg = true;
 	}
 	if (!Lazer::lazerLoadFlg)
@@ -423,7 +424,7 @@ void LoadAll()
 	if (!RotationLoadGraphFlg)
 	{
 		Rotation::rotation_gh = LoadGraph("Data/Image/上窪君.png");
-		Rotation::rotation_se = LoadSoundMem("Data/Music/se/");//
+		Rotation::rotation_se = LoadSoundMem("Data/Music/se/magic-chant2.mp3");
 		RotationLoadGraphFlg = true;
 	}
 	if (!bossHpLoadFlg)

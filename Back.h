@@ -5,10 +5,10 @@ class Back
 {
 public:
 	int Back_gh,Title_gh,Over_gh,boss_gh1,boss_gh2,Flame_gh,floor_gh,tutorial_gh,dark_gh;
-	int eyeOpenMode,animTCnt,animCnt, animX,animY,pictureNum;
+	int eyeOpenMode,animTCnt,animCnt, animX,animY,pictureNum,titleCnt;
 	int tBossX, tBossY;
 	int fallDownY;
-	int fallDownCnt;
+	int fallDownCnt,endCnt;
 	int darkCnt;
 	float bossSwayY;
 	float variableX, variableY;
@@ -19,6 +19,7 @@ public:
 	void DrawTutorialBack();
 	void DrawBossDeadBack();
 	void DrawPlayBack();
+	void DrawClearBack();
 	void DrawOverBack();
 	void DrawDark();
 };
